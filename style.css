@@ -1,0 +1,394 @@
+/* Global reset and styling */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #121212;
+    font-family: 'Montserrat', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    perspective: 1500px; /* Essential for 3D depth */
+}
+
+/* Background decorations */
+.stars {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+        radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px);
+    background-size: 550px 550px, 350px 350px;
+    background-position: 0 0, 40px 60px;
+    opacity: 0.2;
+    z-index: 1;
+}
+
+.ambient-glow {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(255, 182, 193, 0.15) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Book Frame Setup */
+.book-container {
+    width: 900px;
+    height: 600px;
+    position: relative;
+    z-index: 5;
+    transition: transform 0.5s ease;
+}
+
+.book {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+    cursor: pointer;
+}
+
+/* Base style for every page state */
+.page {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    opacity: 0;
+    transform-style: preserve-3d;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+/* Front & Back Covers (Single full sheet styling) */
+.front-cover, .back-cover {
+    width: 50%;
+    left: 25%; /* Center it when book is closed */
+    background: linear-gradient(135deg, #2b2b2b 0%, #1a1a1a 100%);
+    border: 8px solid #3a3a3a;
+    border-radius: 4px 12px 12px 4px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.front-cover .page-content, .back-cover .page-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-align: center;
+    padding: 40px;
+}
+
+.cover-design h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    font-family: 'Caveat', cursive;
+    letter-spacing: 2px;
+}
+
+.cover-design .subtitle {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: #ffb6c1;
+    margin-bottom: 40px;
+}
+
+.heart-icon {
+    font-size: 4rem;
+    animation: heartbeat 1.5s infinite;
+    margin-bottom: 20px;
+}
+
+.tap-hint {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.6;
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 10px 20px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+/* Inside multi-sheet spreads */
+.inside-page {
+    display: flex;
+    width: 100%;
+}
+
+.sheet {
+    width: 50%;
+    height: 100%;
+    background-color: #1c1c1c; /* Black sheets mimicking your album background */
+    border: 4px solid #111;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    box-shadow: inset 0 0 40px rgba(0,0,0,0.8);
+}
+
+.left-sheet {
+    border-radius: 12px 0 0 12px;
+    border-right: 2px solid #000;
+}
+
+.right-sheet {
+    border-radius: 0 12px 12px 0;
+    border-left: 2px solid #000;
+}
+
+/* Scrapbook Elements & Typography */
+.scrapbook-paper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #e0e0e0;
+}
+
+.anniversary-title {
+    font-family: 'Caveat', cursive;
+    font-size: 2.8rem;
+    color: #fff;
+    margin-bottom: 25px;
+    border-bottom: 1px dashed rgba(255,255,255,0.2);
+    padding-bottom: 10px;
+}
+
+.message-body p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-bottom: 15px;
+    font-family: 'Montserrat', sans-serif;
+    color: #cccccc;
+}
+
+/* Artistic cloud frames from reference photo */
+.photo-frame {
+    background: #252525;
+    padding: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    display: inline-block;
+    position: absolute;
+    transition: transform 0.3s ease;
+}
+
+.photo-frame:hover {
+    transform: scale(1.03) rotate(0deg) !important;
+    z-index: 10;
+}
+
+.cloud-border {
+    border: 6px double #ffffff; /* Simplifies artistic marker border simulation */
+    border-radius: 40px 15px 45px 20px; /* Organic look */
+    padding: 15px;
+}
+
+/* Polaroid framing style */
+.polaroid-style {
+    border: 1px solid #333;
+    background: #fff;
+    color: #111;
+    padding: 12px 12px 35px 12px;
+    border-radius: 2px;
+}
+
+.polaroid-style .caption {
+    font-family: 'Caveat', cursive;
+    color: #222;
+    font-size: 1.5rem;
+    margin-top: 12px;
+    text-align: center;
+}
+
+.photo-placeholder {
+    width: 100%;
+    height: 100%;
+    background-color: #333;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #888;
+    border: 1px dashed 44px;
+}
+
+.polaroid-style .photo-placeholder {
+    background-color: #eee;
+    color: #666;
+}
+
+.photo-frame .caption {
+    font-family: 'Caveat', cursive;
+    font-size: 1.6rem;
+    color: #ffb6c1;
+    margin-top: 8px;
+    text-align: center;
+}
+
+/* Absolute layouts mimicking your page spreads exactly */
+/* Spread 1 Right Sheet Positioning */
+.collage-layout-1 {
+    position: relative;
+    height: 100%;
+}
+.collage-layout-1 .photo-top {
+    width: 260px;
+    height: 200px;
+    top: 30px;
+    left: 20px;
+    transform: rotate(-4deg);
+}
+.collage-layout-1 .photo-bottom {
+    width: 250px;
+    height: 220px;
+    bottom: 30px;
+    right: 20px;
+    transform: rotate(3deg);
+}
+
+/* Spread 2 Left Sheet Positioning */
+.collage-layout-2a {
+    position: relative;
+    height: 100%;
+}
+.collage-layout-2a .photo-frame:nth-child(1) {
+    width: 260px;
+    height: 210px;
+    top: 40px;
+    left: 10px;
+    transform: rotate(2deg);
+}
+.collage-layout-2a .photo-frame:nth-child(2) {
+    width: 230px;
+    height: 240px;
+    bottom: 40px;
+    right: 10px;
+    transform: rotate(-5deg);
+}
+
+/* Spread 2 Right Sheet Positioning */
+.collage-layout-2b {
+    position: relative;
+    height: 100%;
+}
+.collage-layout-2b .photo-frame:nth-child(1) {
+    width: 240px;
+    height: 250px;
+    top: 30px;
+    right: 20px;
+    transform: rotate(4deg);
+}
+.collage-layout-2b .photo-frame:nth-child(2) {
+    width: 250px;
+    height: 200px;
+    bottom: 50px;
+    left: 20px;
+    transform: rotate(-3deg);
+}
+
+/* Final Note Formatting */
+.final-note {
+    margin: 35px 0;
+}
+.final-note p {
+    font-size: 1.2rem !important;
+    line-height: 1.8;
+    color: #ddd;
+}
+.infinity-symbol {
+    font-size: 3.5rem;
+    color: #ffb6c1;
+    margin-bottom: 10px;
+}
+.footer-note {
+    font-family: 'Caveat', cursive;
+    font-size: 1.8rem;
+    color: #aaa;
+}
+
+/* State Management rules controlled via JavaScript Classes */
+.active-state {
+    visibility: visible;
+    opacity: 1;
+    z-index: 10;
+}
+
+/* Bottom Hint Styling */
+.controls-overlay {
+    position: absolute;
+    bottom: 30px;
+    color: rgba(255,255,255,0.4);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* Heartbeat animation */
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    20% { transform: scale(1.1); }
+    40% { transform: scale(1); }
+    60% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Smooth layout responsive fixes for smaller heights */
+@media(max-height: 700px) {
+    .book-container {
+        transform: scale(0.85);
+    }
+}
+#first-photo{
+    background-image: url(pic1.jpg);
+    background-size: 100%;
+    background-position: center;
+}
+#second-photo{
+    background-image: url(pic2.jpg);
+    background-size: 150%;
+    background-position: center;
+}
+#third-photo{
+    background-image: url(pic3.jpg);
+    background-size: 100%;
+}
+#fourth-photo{
+    background-image: url(pic4.jpg);
+    background-size: 100%;
+}
+#fifth-photo{
+    background-image: url(pic5.jpg);
+    background-size: 100%;
+}
+#sixth-photo{
+    background-image: url(pic6.jpg);
+    background-size: 100%;
+}

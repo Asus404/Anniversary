@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 2nd Anniversary!</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts for Handwriting/Romantic aesthetic -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="ambient-glow"></div>
+    
+    <div class="book-container">
+        <!-- The interactive book structure -->
+        <div class="book" id="anniversaryBook">
+            
+            <!-- FRONT COVER -->
+            <div class="page front-cover" id="coverFront">
+                <div class="page-content">
+                    <div class="cover-design">
+                        <div class="heart-icon">❤️</div>
+                        <h1>Our Story</h1>
+                        <p class="subtitle">2 Years of Us</p>
+                        <div class="tap-hint">Click to Open</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAGE 1: Intro Message & Early Memories -->
+            <div class="page inside-page page-1" id="page1">
+                <!-- Left Sheet: Heartfelt Greeting -->
+                <div class="sheet left-sheet">
+                    <div class="scrapbook-paper">
+                        <h2 class="anniversary-title">Happy 2nd Anniversary My Love!</h2>
+                        <div class="message-body">
+                            <p>Two whole years since we started this beautiful journey together. Every single day with you has been an incredible adventure full of laughter, deep conversations, and endless love.</p>
+                            <p>As you take this massive, exciting step forward to pursue your Master's degree abroad, I want you to remember one thing: no distance can dim the love we share. I am incredibly proud of you, and I will be cheering for you every single mile away.</p>
+                            <p>Here's to us, our beautiful past, and our even brighter future. ❤️</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Right Sheet: First batch of photos -->
+                <div class="sheet right-sheet">
+                    <div class="scrapbook-paper collage-layout-1">
+                        <div class="photo-frame cloud-border photo-top">
+                            <div class="photo-placeholder" id="first-photo"></div>
+                            <p class="caption">Our silly faces.</p>
+                        </div>
+                        <div class="photo-frame cloud-border photo-bottom">
+                            <div class="photo-placeholder" id="second-photo"></div>
+                            <p class="caption">Where it all began...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAGE 2: Full Gallery Grid -->
+            <div class="page inside-page page-2" id="page2">
+                <!-- Left Sheet: Collage Continue -->
+                <div class="sheet left-sheet">
+                    <div class="scrapbook-paper collage-layout-2a">
+                        <div class="photo-frame cloud-border">
+                            <div class="photo-placeholder" id="third-photo"></div>
+                            <p class="caption">Every day is an adventure with you.</p>
+                        </div>
+                        <div class="photo-frame polaroid-style">
+                            <div class="photo-placeholder" id="fourth-photo"></div>
+                            <p class="caption">Blessed.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Right Sheet: Collage Continue -->
+                <div class="sheet right-sheet">
+                    <div class="scrapbook-paper collage-layout-2b">
+                        <div class="photo-frame polaroid-style">
+                            <div class="photo-placeholder" id="fifth-photo"></div>
+                            <p class="caption">My favorite place in the world.</p>
+                        </div>
+                        <div class="photo-frame cloud-border">
+                            <div class="photo-placeholder" id="sixth-photo"></div>
+                            <p class="caption">Counting down the days.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BACK COVER -->
+            <div class="page back-cover" id="coverBack">
+                <div class="page-content">
+                    <div class="cover-design back-design">
+                        <h2>To the Next Chapter</h2>
+                        <div class="message-body final-note">
+                            <p>Distance is only temporary, but what we've built is forever.</p>
+                            <p>Just a little reminder that <b>I am so thankful for you and your beautiful, unconditional love</b>. Having you in my life is the best thing that ever happened to me. <br><b>I Love You so so so so so much!</b> 🥰</p>
+                        </div>
+                        <div class="infinity-symbol">∞</div>
+                        <p class="footer-note">Forever & Always yours.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Navigation tips -->
+    <div class="controls-overlay">
+        <span id="clickHint">Click the book to turn pages</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
